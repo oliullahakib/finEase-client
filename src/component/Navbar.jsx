@@ -10,8 +10,8 @@ const Navbar = () => {
         <li><NavLink to={'/reports'} >Reports</NavLink></li>
     </>
     return (
-        <Mydiv className="px-3 bg-primary rounded-full">
-            <div className="navbar bg-base-100 shadow-sm">
+        <Mydiv className="px-3 rounded-full sticky z-10 glass-card top-0">
+            <div className="navbar shadow-sm">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

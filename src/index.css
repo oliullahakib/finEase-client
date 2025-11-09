@@ -16,6 +16,7 @@
   --color-secondary: #B4F077;
   --color-primary: #28D99D;
   --color-base-200:#232323;
+  --color-accent:#313647;
   --color-base-300:#2C2C2C;
 
 }
@@ -32,4 +33,22 @@
   font-style: normal;
   font-variation-settings:
     "wdth" 100;
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.primary-btn{
+  @apply px-4 py-3 bg-primary text-black rounded-full
+}
+.glass-btn{
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  @apply px-4 py-2 rounded-full
 }

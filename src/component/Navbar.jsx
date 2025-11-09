@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import Mydiv from './Mydiv';
 
 const Navbar = () => {
     const links = <>
@@ -9,7 +10,7 @@ const Navbar = () => {
         <li><NavLink to={'/reports'} >Reports</NavLink></li>
     </>
     return (
-        <div>
+        <Mydiv className="px-3 bg-primary rounded-full">
             <div className="navbar bg-base-100 shadow-sm">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -23,7 +24,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">
-                        <img className='w-12' src="https://img.icons8.com/avantgarde/100/box.png" alt="" /> Fin<span className='text-primary'>Ease</span></a>
+                        <img className='w-12' src="https://img.icons8.com/avantgarde/100/box.png" alt="logo" /> Fin<span className='text-primary'>Ease</span></a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -49,8 +50,10 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> 
+        </Mydiv>
+           
+        
     );
 };
 

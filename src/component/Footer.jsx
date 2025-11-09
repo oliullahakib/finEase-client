@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 const Footer = () => {
     return (
         <div>
-            <footer className="footer space-x-3 sm:footer-horizontal bg-base-200 text-base-content p-10">
+            <footer className="footer text-white space-x-3 sm:footer-horizontal bg-base-200  p-10">
                 <aside>
                     <img className='w-12' src="https://img.icons8.com/avantgarde/100/box.png" alt="logo" />
                     <p className='text-2xl'>

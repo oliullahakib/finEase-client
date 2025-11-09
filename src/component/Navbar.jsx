@@ -42,9 +42,9 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex="-1"
-                            className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <p className='text-xl'>Alia Neni</p>
-                            <p className='text-gray-400'>example@gmail.com</p>
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <p className='text-xl text-center'>Alia Neni</p>
+                            <p className='text-gray-400 text-center'>example@gmail.com</p>
                             <li className='font-bold mt-3'><a> Profile</a></li>
                             <li className='font-bold mt-3 btn text-black btn-secondary'>Logout</li>
                         </ul>

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
-/* @plugin "daisyui/theme" {
+@plugin "daisyui/theme" {
   name: "light";
   default: true;
   --color-secondary: #B4F077;
@@ -9,7 +9,7 @@
   --color-base-200:#232323;
   --color-base-300:#2C2C2C;
 
-} */
+}
 @plugin "daisyui/theme" {
   name: "dark";
   default: true;

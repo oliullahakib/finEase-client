@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+/* @plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-secondary: #B4F077;
+  --color-primary: #28D99D;
+  --color-base-200:#232323;
+  --color-base-300:#2C2C2C;
+
+} */
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  --color-secondary: #B4F077;
+  --color-primary: #28D99D;
+  --color-base-200:#232323;
+  --color-base-300:#2C2C2C;
+
+}
+.momo-font {
+  font-family: "Momo Trust Display", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-font {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}

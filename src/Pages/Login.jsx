@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { motion } from "motion/react"
 import { Link } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { AuthContext } from '../component/Context/AuthContext';
+import toast from 'react-hot-toast';
 const Login = () => {
-      const [show, setShow] = useState(false)
+    const {loginUser}=use(AuthContext)
+      const [show, setShow] = useState(false);
+      const handleLogin=(e)=>{
+        e.preventDefault()
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        loginUser(email,password)
+        .then((res)=>{
+            console.log(res.user)
+            toast.success("Login Successfully")
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+      }
     return (
         <div>
             <div className="hero min-h-screen">
@@ -13,9 +30,9 @@ const Login = () => {
                             <h1 className="text-5xl momo-font linear-text font-bold text-center">Login now</h1>
                             <p className='text-center mt-3'>Don't have Account?Please <Link className='text-blue-400 hover:text-blue-600' to={"/register"} >Register</Link> </p>
                             <div className='border border-white opacity-60 mt-5'></div>
-                            <fieldset className="fieldset ">
+                            <form onSubmit={handleLogin} className="fieldset ">
                                 <label className="label text-white">Email</label>
-                                <input type="email" className="input glass-btn" placeholder="Email" />
+                                <input name='email' type="email" className="input glass-btn" placeholder="Email" />
                                 {/* password  */}
                                 <div className='relative'>
                                     <label className="label text-white">Password</label>
@@ -45,7 +62,7 @@ const Login = () => {
                                     Login with Google
                                 </motion.button>
                                 <p className='text-center font-semibold mt-3'>Don't have Account?Please <Link className=' text-blue-400 hover:text-blue-500' to={"/register"} >Register</Link> </p>
-                            </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>

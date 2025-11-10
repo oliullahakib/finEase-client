@@ -9,12 +9,10 @@ const Navbar = () => {
     const location = useLocation()
     const links = <>
         <li><NavLink to={'/'} >Home</NavLink></li>
+        <li><NavLink to={'/add-transaction'} >Add Transaction</NavLink></li>
+        <li><NavLink to={'/reports'} >Reports</NavLink></li>
         {
-            user && <>
-                <li><NavLink to={'/addTransaction'} >Add Transaction</NavLink></li>
-                <li><NavLink to={'/myTransaction'} >My Transaction</NavLink></li>
-                <li><NavLink to={'/reports'} >Reports</NavLink></li>
-            </>
+            user && <li><NavLink to={'/my-transaction'} >My Transaction</NavLink></li>  
         }
     </>
     const handleLogout=()=>{

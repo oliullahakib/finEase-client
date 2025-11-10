@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import Mydiv from './Mydiv';
-
+import { motion } from "motion/react"
 const Navbar = () => {
     const links = <>
         <li><NavLink to={'/'} >Home</NavLink></li>
@@ -46,14 +46,30 @@ const Navbar = () => {
                             <p className='text-xl text-center'>Alia Neni</p>
                             <p className='text-gray-400 text-center'>example@gmail.com</p>
                             <li className='font-bold mt-3'><a> Profile</a></li>
-                            <li className='font-bold mt-3 btn text-black btn-secondary'>Logout</li>
+                            <li className='font-bold mt-3 btn text-black btn-error rounded-full'>Logout</li>
+                            <div className='flex flex-col'>
+                                <motion.button
+                                    whileHover={{ scale: .9 }}
+                                    transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link className='btn primary-btn w-full' to={"/login"}>Login</Link>
+                                </motion.button>
+                                <motion.button
+                                    whileHover={{ scale: .9 }}
+                                    transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
+                                     whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link className='btn glass-btn w-full' to={"/register"}>Register</Link>
+                                </motion.button>
+                            </div>
                         </ul>
                     </div>
                 </div>
-            </div> 
+            </div>
         </Mydiv>
-           
-        
+
+
     );
 };
 

@@ -1,11 +1,12 @@
 import React, { use, useState } from 'react';
 import { motion } from "motion/react"
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../component/Context/AuthContext';
 import toast from 'react-hot-toast';
 const Register = () => {
-    const { creatUser } = use(AuthContext)
+    const { creatUser, updateUser,setLoading } = use(AuthContext)
+    const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [passwordErr, setPasswordErr] = useState('')
     const [nameErr, setNameErr] = useState('')
@@ -16,24 +17,37 @@ const Register = () => {
         setNameErr('')
         const displayName = e.target.name.value;
         const nameTerm = displayName.trim()
-        if(nameTerm.length<5) return setNameErr("Name should contain more then 5 characters")
+        if (nameTerm.length < 5) return setNameErr("Name should contain more then 5 characters")
         const photoURL = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const charRegex = /^.{6,}$/;
-         if (!charRegex.test(password)) return setPasswordErr(" Length must be at least 6 characters")
+        if (!charRegex.test(password)) return setPasswordErr(" Length must be at least 6 characters")
         const upperCaseRegex = /[A-Z]/;
         if (!upperCaseRegex.test(password)) return setPasswordErr(" Must have an Uppercase letter in the password")
         const lowerCaseRegex = /[a-z]/;
         if (!lowerCaseRegex.test(password)) return setPasswordErr("  Must have a Lowercase letter in the password")
-        
-       
+
+
         creatUser(email, password)
-            .then(res => {
-                console.log(res.user)
+            .then((res) => {
+                setLoading(true)
+                // updateUser 
+                const userObj = {displayName,photoURL}
+                console.log(userObj)
+                updateUser(res.user,userObj)
+                .then(() => {
+                    toast.success("Create User Successfully")
+                    console.log(res.user)
+                        setLoading(false)
+                        navigate("/")
+                    }).catch((error) => {
+                        console.log(error)
+                    });
             })
             .catch(err => {
                 console.log(err)
+                setLoading(false)
             })
     }
     return (

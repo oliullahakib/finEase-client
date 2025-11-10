@@ -3,23 +3,38 @@ import { motion } from "motion/react"
 import { Link } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../component/Context/AuthContext';
+import toast from 'react-hot-toast';
 const Register = () => {
-    const {creatUser}=use(AuthContext)
-    const [show, setShow] = useState(false)
-    const handleRegister=(e)=>{
+    const { creatUser } = use(AuthContext)
+    const [show, setShow] = useState(false);
+    const [passwordErr, setPasswordErr] = useState('')
+    const [nameErr, setNameErr] = useState('')
+    const handleRegister = (e) => {
         e.preventDefault()
+        // reset values 
+        setPasswordErr('')
+        setNameErr('')
         const displayName = e.target.name.value;
+        const nameTerm = displayName.trim()
+        if(nameTerm.length<5) return setNameErr("Name should contain more then 5 characters")
         const photoURL = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        // console.log("register",{displayName,photoURL,email,password})
-        creatUser(email,password)
-        .then(res=>{
-            console.log(res.user)
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        const charRegex = /^.{6,}$/;
+         if (!charRegex.test(password)) return setPasswordErr(" Length must be at least 6 characters")
+        const upperCaseRegex = /[A-Z]/;
+        if (!upperCaseRegex.test(password)) return setPasswordErr(" Must have an Uppercase letter in the password")
+        const lowerCaseRegex = /[a-z]/;
+        if (!lowerCaseRegex.test(password)) return setPasswordErr("  Must have a Lowercase letter in the password")
+        
+       
+        creatUser(email, password)
+            .then(res => {
+                console.log(res.user)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     return (
         <div>
@@ -34,6 +49,7 @@ const Register = () => {
                                     {/* Name  */}
                                     <label className="label text-white">Name</label>
                                     <input name='name' required type="text" className="input glass-btn" placeholder="Name" />
+                                    <p className='text-red-300'>{nameErr}</p>
                                     {/* Photo URL  */}
                                     <label className="label text-white">Photo URL</label>
                                     <input name='photo' required type="text" className="input glass-btn" placeholder="Photo URL" />
@@ -41,15 +57,16 @@ const Register = () => {
                                     <label className="label text-white">Email</label>
                                     <input name='email' required type="email" className="input glass-btn" placeholder="Email" />
                                     {/* password  */}
-                                   <div className='relative'>
-                                     <label className="label text-white">Password</label>
-                                    <input name='password' required type={show?"text":"password"} className="input glass-btn" placeholder="Password" />
-                                    <span onClick={()=>setShow(!show)} className='absolute cursor-pointer top-7 right-7'>
-                                        {
-                                            show?<FaEyeSlash size={20} />:<FaEye size={20} />
-                                        }
-                                    </span>
-                                   </div>
+                                    <div className='relative'>
+                                        <label className="label text-white">Password</label>
+                                        <input name='password' required type={show ? "text" : "password"} className="input glass-btn" placeholder="Password" />
+                                        <span onClick={() => setShow(!show)} className='absolute cursor-pointer top-7 right-7'>
+                                            {
+                                                show ? <FaEyeSlash size={20} /> : <FaEye size={20} />
+                                            }
+                                        </span>
+                                        <p className='text-red-300'>{passwordErr}</p>
+                                    </div>
 
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
@@ -69,7 +86,7 @@ const Register = () => {
                                         <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
                                         Login with Google
                                     </motion.button>
-                                     <p className='text-center font-semibold mt-3'>Already have Account?Please <Link className=' text-blue-400 hover:text-blue-500' to={"/login"} >Login</Link> </p>
+                                    <p className='text-center font-semibold mt-3'>Already have Account?Please <Link className=' text-blue-400 hover:text-blue-500' to={"/login"} >Login</Link> </p>
                                 </form>
                             </div>
                         </div>

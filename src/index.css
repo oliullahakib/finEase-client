@@ -55,3 +55,6 @@
 .linear-text{
   @apply bg-linear-to-bl from-secondary to-primary text-transparent bg-clip-text
 }
+.linear-btn{
+  @apply bg-linear-to-bl from-secondary to-primary 
+}

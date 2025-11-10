@@ -60,7 +60,7 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <p className='text-xl text-center'>{user?.displayName || "Name"}</p>
                             <p className='text-gray-400 text-center'>{user?.email ||"example@gmail.com"}</p>
-                            <li className='font-bold mt-3'><a> Profile</a></li>
+                            <Link to={'/profile'} className='font-bold mt-3'> Profile</Link>
                             {
                                 user&&<button onClick={handleLogout} className='font-bold mt-3 btn text-black btn-error rounded-full'>Logout</button>
                             }

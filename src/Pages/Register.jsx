@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { motion } from "motion/react"
 import { Link } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { AuthContext } from '../component/Context/AuthContext';
 const Register = () => {
+    const {creatUser}=use(AuthContext)
     const [show, setShow] = useState(false)
     const handleRegister=(e)=>{
         e.preventDefault()
@@ -10,7 +12,14 @@ const Register = () => {
         const photoURL = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log("register",{displayName,photoURL,email,password})
+        // console.log("register",{displayName,photoURL,email,password})
+        creatUser(email,password)
+        .then(res=>{
+            console.log(res.user)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
     return (
         <div>

@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link, NavLink } from 'react-router';
 import Mydiv from './Mydiv';
 import { motion } from "motion/react"
+import { AuthContext } from './Context/AuthContext';
+import toast from 'react-hot-toast';
 const Navbar = () => {
+    const { user,logoutUser } = use(AuthContext);
     const links = <>
         <li><NavLink to={'/'} >Home</NavLink></li>
-        <li><NavLink to={'/addTransaction'} >Add Transaction</NavLink></li>
-        <li><NavLink to={'/myTransaction'} >My Transaction</NavLink></li>
-        <li><NavLink to={'/reports'} >Reports</NavLink></li>
+        {
+            user && <>
+                <li><NavLink to={'/addTransaction'} >Add Transaction</NavLink></li>
+                <li><NavLink to={'/myTransaction'} >My Transaction</NavLink></li>
+                <li><NavLink to={'/reports'} >Reports</NavLink></li>
+            </>
+        }
     </>
+    const handleLogout=()=>{
+        logoutUser()
+        .then(()=>{
+            toast.success('Logout')
+        })
+    }
     return (
         <Mydiv className="px-3 rounded-full sticky z-10 glass-card top-0">
             <div className="navbar shadow-sm">
@@ -32,7 +45,8 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <div className="dropdown dropdown-end">
+                    {
+                        user?<div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                                 <img
@@ -46,8 +60,13 @@ const Navbar = () => {
                             <p className='text-xl text-center'>Alia Neni</p>
                             <p className='text-gray-400 text-center'>example@gmail.com</p>
                             <li className='font-bold mt-3'><a> Profile</a></li>
-                            <li className='font-bold mt-3 btn text-black btn-error rounded-full'>Logout</li>
-                            <div className='flex flex-col'>
+                            {
+                                user&&<button onClick={handleLogout} className='font-bold mt-3 btn text-black btn-error rounded-full'>Logout</button>
+                            }
+                            
+                            
+                        </ul>
+                    </div>:<div className='flex gap-3'>
                                 <motion.button
                                     whileHover={{ scale: .9 }}
                                     transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
@@ -58,13 +77,13 @@ const Navbar = () => {
                                 <motion.button
                                     whileHover={{ scale: .9 }}
                                     transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
-                                     whileTap={{ scale: 0.95 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
                                     <Link className='btn glass-btn w-full' to={"/register"}>Register</Link>
                                 </motion.button>
                             </div>
-                        </ul>
-                    </div>
+                    }
+                    
                 </div>
             </div>
         </Mydiv>

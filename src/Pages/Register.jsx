@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../component/Context/AuthContext';
 import toast from 'react-hot-toast';
 const Register = () => {
-    const { creatUser, updateUser,setLoading } = use(AuthContext)
+    const { creatUser, updateUser,setLoading,loginWithGoogle } = use(AuthContext)
     const navigate = useNavigate()
     const [show, setShow] = useState(false);
     const [passwordErr, setPasswordErr] = useState('')
@@ -50,6 +50,16 @@ const Register = () => {
                 setLoading(false)
             })
     }
+    const handleGoogleLogin=()=>{
+        loginWithGoogle()
+        .then(()=>{
+           toast.success("Create User Successfully") 
+           navigate("/")
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+      }
     return (
         <div>
             <div>
@@ -93,6 +103,7 @@ const Register = () => {
                                         <div className='w-1/2 border border-white opacity-60 h-px'></div>
                                     </div>
                                     <motion.button
+                                    onClick={handleGoogleLogin}
                                         whileHover={{ scale: 1.05 }}
                                         transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
                                         whileTap={{ scale: 0.95 }}

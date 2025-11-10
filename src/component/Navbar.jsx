@@ -1,11 +1,12 @@
 import React, { use } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useLocation } from 'react-router';
 import Mydiv from './Mydiv';
 import { motion } from "motion/react"
 import { AuthContext } from './Context/AuthContext';
 import toast from 'react-hot-toast';
 const Navbar = () => {
     const { user,logoutUser } = use(AuthContext);
+    const location = useLocation()
     const links = <>
         <li><NavLink to={'/'} >Home</NavLink></li>
         {
@@ -72,7 +73,7 @@ const Navbar = () => {
                                     transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <Link className='btn primary-btn w-full' to={"/login"}>Login</Link>
+                                    <Link state={location.pathname} className='btn primary-btn w-full' to={"/login"}>Login</Link>
                                 </motion.button>
                                 <motion.button
                                     whileHover={{ scale: .9 }}

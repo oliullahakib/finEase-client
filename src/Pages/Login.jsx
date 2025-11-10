@@ -1,12 +1,15 @@
 import React, { use, useState } from 'react';
 import { motion } from "motion/react"
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../component/Context/AuthContext';
 import toast from 'react-hot-toast';
 const Login = () => {
-    const {loginUser}=use(AuthContext)
-      const [show, setShow] = useState(false);
+    const {loginUser,loginWithGoogle}=use(AuthContext)
+    const [show, setShow] = useState(false);
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log("login",location)
       const handleLogin=(e)=>{
         e.preventDefault()
         const email = e.target.email.value;
@@ -16,6 +19,17 @@ const Login = () => {
         .then((res)=>{
             console.log(res.user)
             toast.success("Login Successfully")
+            navigate(location.state)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+      }
+      const handleGoogleLogin=()=>{
+        loginWithGoogle()
+        .then(()=>{
+           toast.success("Login Successfully") 
+           navigate(location.state)
         })
         .catch(err=>{
             console.log(err)
@@ -54,6 +68,7 @@ const Login = () => {
                                     <div className='w-1/2 border border-white opacity-60 h-px'></div>
                                 </div>
                                 <motion.button
+                                onClick={handleGoogleLogin}
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
                                     whileTap={{ scale: 0.95 }}

@@ -9,20 +9,18 @@ const Login = () => {
     const [show, setShow] = useState(false);
     const location = useLocation()
     const navigate = useNavigate()
-    console.log("login",location)
       const handleLogin=(e)=>{
         e.preventDefault()
         const email = e.target.email.value;
         const password = e.target.password.value;
 
         loginUser(email,password)
-        .then((res)=>{
-            console.log(res.user)
+        .then(()=>{
             toast.success("Login Successfully")
             navigate(location.state)
         })
         .catch(err=>{
-            console.log(err)
+            toast.error(err.code)
         })
       }
       const handleGoogleLogin=()=>{

@@ -65,13 +65,13 @@ const Navbar = () => {
                             
                             
                         </ul>
-                    </div>:<div className='flex gap-3'>
+                    </div>:<div className='flex gap-5'>
                                 <motion.button
                                     whileHover={{ scale: .9 }}
                                     transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <Link state={location.pathname} className='btn primary-btn w-full' to={"/login"}>Login</Link>
+                                    <Link state={location.pathname} className='btn primary-btn w-full mx-3' to={"/login"}>Login</Link>
                                 </motion.button>
                                 <motion.button
                                     whileHover={{ scale: .9 }}

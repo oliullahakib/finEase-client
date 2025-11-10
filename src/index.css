@@ -58,3 +58,6 @@
 .linear-btn{
   @apply bg-linear-to-bl from-secondary to-primary 
 }
+a.active{
+  @apply bg-secondary rounded-full text-black font-semibold
+}

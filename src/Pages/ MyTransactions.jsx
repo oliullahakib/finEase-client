@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import useAxiosSecure from '../hook/useAxiosSecure';
 import { AuthContext } from '../component/Context/AuthContext';
+import TransactionCard from '../component/HomePage/TransactionCard';
 
 const  MyTransactions = () => {
     const axiosSecure=useAxiosSecure()
@@ -9,13 +10,15 @@ const  MyTransactions = () => {
     useEffect(() => {
       axiosSecure.get(`/my-transactions?email=${user.email}`)
       .then(data=>{
-        console.log(data.data)
+        setTransactions(data.data)
       })
     }, [user,axiosSecure])
     
     return (
         <div>
-            my transactions
+           {
+            transactions?transactions.map(transaction=><TransactionCard key={transaction._id} transaction={transaction} />):''
+           }
         </div>
     );
 };

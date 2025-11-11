@@ -18,7 +18,7 @@ const TransactionCard = ({ transaction }) => {
             <div className='right flex  items-center gap-3'>
                 <button className='btn btn-warning rounded-full'>Update</button>
                 <button className='btn btn-error rounded-full'>Delete</button>
-                <Link to={`/details/${_id}`} className='primary-btn' >View Details</Link>
+                <Link to={`/transaction/${_id}`} className='primary-btn' >View Details</Link>
             </div>
         </Mydiv>
     );

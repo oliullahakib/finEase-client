@@ -13,7 +13,6 @@ const  MyTransactions = () => {
         setTransactions(data.data)
       })
     }, [user,axiosSecure])
-    
     return (
         <div>
            {

@@ -54,7 +54,7 @@ const TransactionDetails = () => {
                     </div>
                     <div className='pl-3 py-2'>
                         <h2 className='text-xl'>Date</h2>
-                       <p>{date.split("T")[0] ||"yy/mm/dd"}</p>
+                       <p>{date?.split("T")[0] ||"yy/mm/dd"}</p>
                     </div>
                 </div>
             </div>

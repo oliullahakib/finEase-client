@@ -45,10 +45,10 @@ const AddTransaction = () => {
                     <div className="card-body ">
                         <form onSubmit={handleAddTransaction} className="fieldset">
 
-                            <div className='left flex justify-between'>
+                            <div className='left flex flex-col md:flex-row justify-between'>
                                 <div>
                                     <label className="label mb-1">Type</label>
-                                    <div className='radioo flex items-center gap-3'>
+                                    <div className='radioo my-2 md:my-2 flex items-center gap-3'>
                                         <input onClick={() => setRadio("expense")} required type="radio" defaultChecked name="radio-1" className="radio" />
                                         <label>Expense</label>
                                         <input onClick={() => setRadio("income")} required type="radio" name="radio-1" className="radio" />
@@ -57,9 +57,9 @@ const AddTransaction = () => {
                                 </div>
                                 <div>
                                     {/* Category  */}
-                                    <label className="label">Category</label>
+                                    <label className="label pr-2">Category</label>
                                     {
-                                        radio === "expense" ? <select name='category' defaultValue="Pick a color" className="select">
+                                        radio === "expense" ? <select name='category' defaultValue="Pick a color" className="select my-3 md:my-0">
                                             <option >Food</option>
                                             <option>Home</option>
                                             <option>Transportation</option>
@@ -93,7 +93,7 @@ const AddTransaction = () => {
 
                             {/* user info */}
 
-                            <div className='userInfo flex justify-between border-t  pt-5'>
+                            <div className='userInfo flex flex-col md:flex-row justify-between border-t  pt-5'>
                                 <div>
                                     {/* UserName  */}
                                     <label className="label">User Name</label>

@@ -87,7 +87,7 @@ const handleAddTransaction = (e) => {
     }
     return (
         <Mydiv className='flex flex-col sm:flex-row justify-around my-5 border border-secondary py-3 sm:rounded-full pl-5 sm:pl-0 shadow-2xl'>
-            <img className='w-12 h-12 rounded-full' src={type === "expense" ? `https://static.thenounproject.com/png/2376642-200.png` : "https://w7.pngwing.com/pngs/536/353/png-transparent-computer-icons-money-income-miscellaneous-text-service.png"} alt="" />
+            <img className='w-12 h-12 rounded-full' src={type === "expense" ? `https://static.thenounproject.com/png/2376642-200.png` : "https://e7.pngegg.com/pngimages/688/266/png-clipart-computer-icons-profit-finance-earnings-money-others-miscellaneous-investment.png"} alt="" />
             <div className='left'>
                 <h3 className='text-xl font-bold'>{type}</h3>
                 <p>{category}</p>

@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router';
 import Mydiv from './Mydiv';
 import { motion } from "motion/react"
@@ -6,6 +6,7 @@ import { AuthContext } from './Context/AuthContext';
 import toast from 'react-hot-toast';
 const Navbar = () => {
     const { user,logoutUser } = use(AuthContext);
+    const [theme, setTheme] = useState(localStorage.getItem('theme')||"light")
     const location = useLocation()
     const links = <>
         <li><NavLink to={'/'} >Home</NavLink></li>
@@ -15,11 +16,20 @@ const Navbar = () => {
             user && <li><NavLink to={'/my-transaction'} >My Transaction</NavLink></li>  
         }
     </>
+    useEffect(() => {
+      document.querySelector('html').setAttribute('data-theme',theme)
+      localStorage.setItem("theme",theme)
+    }, [theme])
+    
     const handleLogout=()=>{
         logoutUser()
         .then(()=>{
             toast.success('Logout')
         })
+    }
+    const handleMode=(e)=>{
+       setTheme(e.target.checked?"dark":"light")
+         
     }
     return (
         <Mydiv className="px-3 rounded-full sticky z-10 glass-card top-0">
@@ -58,7 +68,12 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <p className='text-xl text-center'>{user?.displayName || "Name"}</p>
                             <p className='text-gray-400 text-center'>{user?.email ||"example@gmail.com"}</p>
-                            <Link to={'/profile'} className='font-bold mt-3'> Profile</Link>
+                            <Link to={'/profile'} className='font-bold  my-3'> Profile</Link>
+                            {/* mode control  */}
+                            <div>
+                                <input onClick={handleMode} defaultChecked={theme==="dark"} type="checkbox" className="toggle m-2" />
+                                <span className='font-bold'>{theme==="dark"?"Dark":"Light"} Mode</span>
+                            </div>
                             {
                                 user&&<button onClick={handleLogout} className='font-bold mt-3 btn text-black btn-error rounded-full'>Logout</button>
                             }

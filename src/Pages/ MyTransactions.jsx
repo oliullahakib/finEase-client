@@ -3,17 +3,20 @@ import useAxiosSecure from '../hook/useAxiosSecure';
 import { AuthContext } from '../component/Context/AuthContext';
 import TransactionCard from '../component/HomePage/TransactionCard';
 import { Link } from 'react-router';
+import Loading from './Loading';
 
 const  MyTransactions = () => {
     const axiosSecure=useAxiosSecure()
-    const {user}=use(AuthContext)
+    const {user,loading,setLoading}=use(AuthContext)
     const [transactions, setTransactions] = useState([])
     useEffect(() => {
       axiosSecure.get(`/my-transactions?email=${user.email}`)
       .then(data=>{
         setTransactions(data.data)
+        setLoading(false)
       })
-    }, [user,axiosSecure])
+    }, [user,axiosSecure,setLoading])
+    if(loading) return <Loading/>
     return (
         <div>
            {

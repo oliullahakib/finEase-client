@@ -1,8 +1,31 @@
-import React, { use } from 'react';
+import React, { use, useRef } from 'react';
 import { AuthContext } from '../component/Context/AuthContext';
+import toast from 'react-hot-toast';
+import Loading from './Loading';
+import { useNavigate } from 'react-router';
 
 const MyProfile = () => {
-    const { user } = use(AuthContext)
+    const { user,updateUser,loading,setLoading } = use(AuthContext)
+    const modalRef = useRef()
+    const navigate = useNavigate()
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        const displayName = e.target.name.value;
+        const photoURL=e.target.photo.value;
+        const userObj={displayName,photoURL}
+        updateUser(user,userObj)
+        .then(()=>{
+            toast.success("Update User Successfuly")
+            modalRef.current.close()
+            setLoading(false)
+            navigate('/profile')
+        })
+        .catch(err=>{
+            toast.error(err.code)
+            setLoading(false)
+        })
+    }
+    if(loading) return <Loading/>
     return (
         <div>
             <div className="hero min-h-screen">
@@ -13,8 +36,28 @@ const MyProfile = () => {
                                 <img className='border w-40 h-40 mx-auto rounded-full' src={user?.photoURL} alt="user" />
                                 <h2 className='text-3xl text-center momo-font linear-text'>{user.displayName}</h2>
                                 <p className='text-xl text-center text-secondary'>{user.email}</p>
-                                <button className="btn btn-warning mt-4">Update Profile</button>
+                                <button onClick={()=>modalRef.current.showModal()} className="btn btn-warning mt-4">Update Profile</button>
                             </fieldset>
+                            {/* modal  */}
+                            <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+                                <div className="modal-box">
+                                    <form onSubmit={handleUpdate} className="fieldset">
+                                        {/* Name  */}
+                                        <label className="label">Name</label>
+                                        <input name='name' type="text" className="input" defaultValue={user.displayName} />
+                                        {/* photo  */}
+                                        <label className="label">Photo URL</label>
+                                        <input name='photo' type="text" className="input" defaultValue={user.photoURL} />
+                                        <button className="btn btn-success mt-4">Update</button>
+                                    </form>
+                                    <div className="modal-action">
+                                        <form method="dialog">
+                                            {/* if there is a button in form, it will close the modal */}
+                                            <button className="btn btn-error">Close</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </dialog>
                         </div>
                     </div>
                 </div>

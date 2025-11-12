@@ -13,12 +13,12 @@ const OverView = () => {
     const [incomeTransactions, setIncomeTransactions] = useState([])
     const [expenseTransactions, setExpenseTransactions] = useState([])
     useEffect(() => {
-          axiosSecure.get(`/my-transactions?email=${user.email}&type=expense`)
+          axiosSecure.get(`/my-transactions?email=${user?.email}&type=expense`)
           .then(data=>{
             setExpenseTransactions(data.data)
             setLoading(false)
           })
-          axiosSecure.get(`/my-transactions?email=${user.email}&type=income`)
+          axiosSecure.get(`/my-transactions?email=${user?.email}&type=income`)
           .then(data=>{
             setIncomeTransactions(data.data)
             setLoading(false)

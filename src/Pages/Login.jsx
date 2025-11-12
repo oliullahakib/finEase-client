@@ -17,7 +17,7 @@ const Login = () => {
         loginUser(email,password)
         .then(()=>{
             toast.success("Login Successfully")
-            navigate(location.state)
+            navigate(location.state ?location.state:"/")
         })
         .catch(err=>{
             toast.error(err.code)
@@ -27,7 +27,7 @@ const Login = () => {
         loginWithGoogle()
         .then(()=>{
            toast.success("Login Successfully") 
-           navigate(location.state)
+            navigate(location.state?location.state:"/")
         })
         .catch(err=>{
             console.log(err)

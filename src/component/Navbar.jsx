@@ -41,8 +41,26 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex="-1"
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 my-3 w-52 p-3 shadow">
                             {links}
+                           {
+                             <div className={`${user?"hidden":"flex"} flex-col gap-5 mt-5`}>
+                                <motion.button
+                                    whileHover={{ scale: .9 }}
+                                    transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link state={location.pathname} className='btn primary-btn w-full ' to={"/login"}>Login</Link>
+                                </motion.button>
+                                <motion.button
+                                    whileHover={{ scale: .9 }}
+                                    transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Link className='btn glass-btn w-full' to={"/register"}>Register</Link>
+                                </motion.button>
+                            </div>
+                           }
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">
@@ -80,7 +98,7 @@ const Navbar = () => {
                             
                             
                         </ul>
-                    </div>:<div className='flex gap-5'>
+                    </div>:<div className='hidden gap-5 lg:flex'>
                                 <motion.button
                                     whileHover={{ scale: .9 }}
                                     transition={{ ease: [0, 0.71, 0.2, 1.01], duration: .5 }}

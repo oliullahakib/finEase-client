@@ -79,15 +79,15 @@ const AddTransaction = () => {
                                     }
                                 </div>
                             </div>
-                            <div className='right flex justify-between pb-5'>
+                            <div className='right flex flex-col sm:flex-row gap-3 justify-between pb-5'>
                                 <div>
                                     {/* Amount  */}
                                     <label className="label">Amount</label>
-                                    <input required name='amount' type="text" className="input" placeholder="Amount" />
+                                    <input required name='amount' type="text" className="input w-full" placeholder="Amount" />
                                 </div>
                                 <div>
                                     <label className="label">Date</label>
-                                    <input required name='date' type="date" className="input" placeholder="Date" />
+                                    <input required name='date' type="date" className="input w-full" placeholder="Date" />
                                 </div>
                             </div>
 

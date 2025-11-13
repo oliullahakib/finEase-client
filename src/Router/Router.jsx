@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
                 element:<PrivateRoute><AddTransaction/></PrivateRoute>
             },
             {
-                path:'/my-transaction',
+                path:'/my-transactions',
                 element:<PrivateRoute><MyTransactions/></PrivateRoute>
             },
             {

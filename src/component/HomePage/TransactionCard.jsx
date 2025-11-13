@@ -1,6 +1,6 @@
 
 import Mydiv from '../Mydiv';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hook/useAxiosSecure';
 import { use, useRef, useState } from 'react';
@@ -11,7 +11,8 @@ const TransactionCard = ({ transaction, setTransactions }) => {
     const { user } = use(AuthContext)
     const axiosSecure = useAxiosSecure()
     const modalRef = useRef()
-    const { _id, type, category, amount, date,description } = transaction;
+    const navigate = useNavigate()
+    const { _id, type, category, amount, date, description } = transaction;
     const [radio, setRadio] = useState(type)
     const [thisCategory, setThisCategory] = useState('')
     const [thisAmount, setThisAmount] = useState()
@@ -54,13 +55,13 @@ const TransactionCard = ({ transaction, setTransactions }) => {
         setThisAmount(amount)
         const dateObj = new Date(date);
         //  const formattedDate= date.toDateString('en-GB',{year:"numeric",month:"2-digit",day:"2-digit"})
-        const formattedDate= dateObj.toISOString().slice(0,10)
+        const formattedDate = dateObj.toISOString().slice(0, 10)
         setThisDate(formattedDate)
         setThisDescription(description)
         setId(_id)
         modalRef.current.showModal()
     }
-const handleAddTransaction = (e) => {
+    const handleUpdateTransaction = (e) => {
         e.preventDefault()
         const type = radio;
         const amount = Number(e.target.amount.value);
@@ -71,7 +72,7 @@ const handleAddTransaction = (e) => {
         const email = user.email;
         const name = user.displayName;
         const updateTransaction = { type, category, date, description, amount, name, email }
-        console.log("edit transaction",updateTransaction,id)
+        // console.log("edit transaction",updateTransaction,id)
 
         axiosSecure.put(`/transaction/update/${id} `, updateTransaction)
             .then(data => {
@@ -81,7 +82,11 @@ const handleAddTransaction = (e) => {
                         text: "Your Transaction has been Updated.",
                         icon: "success"
                     })
-                   modalRef.current.close()
+                    modalRef.current.close()
+                    axiosSecure.get(`/my-transactions?email=${user.email}`)
+                        .then(data => {
+                            setTransactions(data.data)
+                        })
                 }
             })
     }
@@ -98,24 +103,24 @@ const handleAddTransaction = (e) => {
             </div>
             <div className='right flex  items-center gap-3'>
                 <button onClick={handleUpdate} className='btn inert:font-light btn-warning rounded-full'>Update</button>
-                <button onClick={handleDelete} className='btn  btn-error rounded-full'>Delete</button>
+                <button onClick={handleDelete} className='btn inert:font-light btn-error rounded-full'>Delete</button>
                 <Link to={`/transaction/${_id}`} className='primary-btn' >View Details</Link>
             </div>
 
             {/* modal  */}
             <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <form onSubmit={handleAddTransaction} className="fieldset">
+                    <form onSubmit={handleUpdateTransaction} className="fieldset">
 
                         <div className='left flex flex-col md:flex-row justify-between'>
                             <div>
                                 <label className="label mb-1">Type</label>
                                 <div className='radioo my-2 md:my-2 flex items-center gap-3'>
-                                    <input onClick={() => setRadio("expense")} required type="radio" defaultChecked={radio==="expense"?true:false} name="radio-1" className="radio" />
+                                    <input onClick={() => setRadio("expense")} required type="radio" defaultChecked={radio === "expense" ? true : false} name="radio-1" className="radio" />
                                     <label>Expense</label>
-                                    <input onClick={() => setRadio("income")} required 
-                                    defaultChecked={radio==="income"?true:false}
-                                    type="radio" name="radio-1" className="radio" />
+                                    <input onClick={() => setRadio("income")} required
+                                        defaultChecked={radio === "income" ? true : false}
+                                        type="radio" name="radio-1" className="radio" />
                                     <label>Income</label>
                                 </div>
                             </div>
@@ -135,7 +140,7 @@ const handleAddTransaction = (e) => {
                                         <option>Others</option>
                                     </select>
                                         : <select name='category' className="select">
-                                             <option >{thisCategory}</option>
+                                            <option >{thisCategory}</option>
                                             <option >Salary</option>
                                             <option>Pocket Money</option>
                                             <option>Business</option>
@@ -162,12 +167,12 @@ const handleAddTransaction = (e) => {
                             <div>
                                 {/* UserName  */}
                                 <label className="label">User Name</label>
-                                <input defaultValue={user.displayName} type="text" className="input" disabled />
+                                <input defaultValue={user.displayName} type="text" className="input bg-base-200 text-white opacity-55" disabled />
                             </div>
                             <div>
                                 {/* UserEmail  */}
                                 <label className="label">User Email</label>
-                                <input defaultValue={user.email} type="text" className="input" disabled />
+                                <input defaultValue={user.email} type="text" className="input bg-base-200 text-white opacity-55" disabled />
                             </div>
 
                         </div>
@@ -176,12 +181,12 @@ const handleAddTransaction = (e) => {
                             <legend className="fieldset-legend">Description</legend>
                             <textarea required defaultValue={thisDescription} name='description' className="textarea w-full h-24" placeholder="Description"></textarea>
                         </fieldset>
-                        <button className="btn btn-primary text-black mt-4">Update Transaction </button>
+                        <button className="btn inert:font-light btn-primary text-black mt-4">Update Transaction </button>
                     </form>
                     <div className="modal-action">
 
                         {/* if there is a button in form, it will close the modal */}
-                        <button onClick={() => modalRef.current.close()} className="btn">Close</button>
+                        <button onClick={() => modalRef.current.close()} className="btn inert:font-light btn-error">Close</button>
 
                     </div>
                 </div>

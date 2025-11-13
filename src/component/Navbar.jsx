@@ -13,7 +13,7 @@ const Navbar = () => {
         <li><NavLink to={'/add-transaction'} >Add Transaction</NavLink></li>
         <li><NavLink to={'/reports'} >Reports</NavLink></li>
         {
-            user && <li><NavLink to={'/my-transaction'} >My Transaction</NavLink></li>  
+            user && <li><NavLink to={'/my-transactions'} >My Transaction</NavLink></li>  
         }
     </>
     useEffect(() => {

@@ -35,6 +35,7 @@ const MyTransactions = () => {
                 </div>
                 }
             </Mydiv>
+           <p className={`text-2xl container mx-auto mt-2`}>All Transactions (<span className='linear-text font-bold momo-font'>{transactions.length}</span>)</p>
             {
                 transactions.length === 0 ? <div className='flex flex-col justify-center items-center min-h-70'>
                     <h2 className='text-3xl opacity-55' >No Transaction Available</h2>

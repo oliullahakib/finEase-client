@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import Mydiv from '../component/Mydiv';
 import useAxiosSecure from '../hook/useAxiosSecure';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { AuthContext } from '../component/Context/AuthContext';
 
 const TransactionDetails = () => {
@@ -33,7 +33,8 @@ const TransactionDetails = () => {
 
     const { amount, category, date, description, type } = (transactions)
     return (
-        <Mydiv className='md:w-2xl mx-auto border rounded-2xl overflow-hidden my-20'>
+       <>
+        <Mydiv className='md:w-2xl mx-auto border rounded-2xl overflow-hidden mt-20'>
             <h1 className="text-2xl momo-font linear-text my-5 font-bold text-center">Transaction Details
             </h1>
             <div className="flex justify-between bg-base-100  shadow-sm">
@@ -67,6 +68,10 @@ const TransactionDetails = () => {
                 <p className=' text-center opacity-55 px-3'>{description}</p>
             </div>
         </Mydiv>
+       <div className='flex justify-center items-center my-5'>
+         <Link to={'/my-transactions'} className='btn primary-btn my-5 ml-3'>Go to Trasactions</Link>
+       </div>
+       </>
     );
 };
 

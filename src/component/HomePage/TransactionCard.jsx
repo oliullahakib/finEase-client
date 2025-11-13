@@ -1,6 +1,6 @@
 
 import Mydiv from '../Mydiv';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hook/useAxiosSecure';
 import { use, useRef, useState } from 'react';
@@ -11,7 +11,6 @@ const TransactionCard = ({ transaction, setTransactions }) => {
     const { user } = use(AuthContext)
     const axiosSecure = useAxiosSecure()
     const modalRef = useRef()
-    const navigate = useNavigate()
     const { _id, type, category, amount, date, description } = transaction;
     const [radio, setRadio] = useState(type)
     const [thisCategory, setThisCategory] = useState('')

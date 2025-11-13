@@ -22,7 +22,8 @@ const MyTransactions = () => {
     return (
         <div>
             <Mydiv>
-                <div className='flex justify-end mt-5 mr-2'>
+                {
+                    transactions.length>1&&<div className='flex justify-end mt-5 mr-2'>
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend">Sort by:</legend>
                         <select defaultValue="none" className="select">
@@ -32,6 +33,7 @@ const MyTransactions = () => {
                         </select>
                     </fieldset>
                 </div>
+                }
             </Mydiv>
             {
                 transactions.length === 0 ? <div className='flex flex-col justify-center items-center min-h-70'>

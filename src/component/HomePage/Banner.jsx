@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { use } from 'react';
 import heroImg from "../../assets/heroImage.png"
 import { Link } from 'react-router';
+import { AuthContext } from '../Context/AuthContext';
 const Banner = () => {
+    const {user }=use(AuthContext)
     return (
         <div className='flex flex-col lg:flex-row w-full lg:pl-8 bg-linear-to-t from-[#28d99e9f]  to-black'>
             <div className="left flex flex-col justify-center p-4 flex-1">
@@ -13,8 +15,10 @@ const Banner = () => {
                 </h1>
                 <p className='opacity-70 text-white my-5'>Take control of your Finance with confidence and clearity our tools and insights help you plan smarter and build the future you deserve</p>
                 <div>
-                    <Link to={"/login"} className='primary-btn cursor-pointer hover:opacity-60  transition ease-in-out'>Get Started</Link>
-                    <button className='ml-3 glass-btn'>Learn More</button>
+                   {
+                    user?"": <Link to={"/login"} className='primary-btn cursor-pointer hover:opacity-60  transition ease-in-out'>Get Started</Link>
+                   }
+                    
                 </div>
             </div>
             <div className="right flex mt-5 lg:mt-0 lg:justify-end flex-1">

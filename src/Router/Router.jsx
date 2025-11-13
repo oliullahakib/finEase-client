@@ -9,6 +9,7 @@ import Reports from "../Pages/Reports";
 import AddTransaction from "../Pages/AddTransaction";
 import MyTransactions from "../Pages/ MyTransactions";
 import TransactionDetails from "../Pages/TransactionDetails";
+import Error404 from "../Pages/Error404";
 
 export const router = createBrowserRouter([
     {
@@ -48,5 +49,9 @@ export const router = createBrowserRouter([
                 element:<PrivateRoute><TransactionDetails/></PrivateRoute>
             }
         ]
+    },
+    {
+        path:'/*',
+        Component:Error404
     }
 ])

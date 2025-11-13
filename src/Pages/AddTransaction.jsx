@@ -97,12 +97,12 @@ const AddTransaction = () => {
                                 <div>
                                     {/* UserName  */}
                                     <label className="label">User Name</label>
-                                    <input defaultValue={user.displayName} type="text" className="input" disabled />
+                                    <input defaultValue={user.displayName} type="text" className="input bg-base-200 text-white opacity-55" disabled />
                                 </div>
                                 <div>
                                     {/* UserEmail  */}
                                     <label className="label">User Email</label>
-                                    <input defaultValue={user.email} type="text" className="input" disabled />
+                                    <input defaultValue={user.email} type="text" className="input bg-base-200 text-white opacity-55" disabled />
                                 </div>
 
                             </div>

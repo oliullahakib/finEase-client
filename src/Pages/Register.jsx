@@ -46,7 +46,7 @@ const Register = () => {
                     });
             })
             .catch(err => {
-                console.log(err)
+                toast.error(err.code)
                 setLoading(false)
             })
     }
@@ -64,7 +64,7 @@ const Register = () => {
         <div>
             <div>
                 <div className="hero min-h-screen">
-                    <div className="hero-content bg-linear-to-t from-base-200 via-[#1a1a19ba] to-[#28D99D90] flex-col lg:flex-row-reverse rounded-3xl">
+                    <div className="hero-content bg-linear-to-t from-base-200 via-[#1a1a19ba] to-[#28D99D] flex-col lg:flex-row-reverse rounded-3xl">
                         <div className="card glass-card w-full max-w-sm shrink-0 shadow-2xl">
                             <div className="card-body min-h-96 md:w-96">
                                 <h1 className="text-5xl momo-font linear-text font-bold text-center">Register now</h1>
@@ -89,7 +89,7 @@ const Register = () => {
                                                 show ? <FaEyeSlash size={20} /> : <FaEye size={20} />
                                             }
                                         </span>
-                                        <p className='text-red-300'>{passwordErr}</p>
+                                        <p className='text-red-400'>{passwordErr}</p>
                                     </div>
 
                                     <motion.button

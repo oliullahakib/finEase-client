@@ -30,7 +30,7 @@ const Login = () => {
             navigate(location.state?location.state:"/")
         })
         .catch(err=>{
-            console.log(err)
+            toast.error(err.message)
         })
       }
     return (
@@ -40,7 +40,6 @@ const Login = () => {
                     <div className="card glass-card w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body min-h-96 md:w-96">
                             <h1 className="text-5xl momo-font linear-text font-bold text-center">Login now</h1>
-                            <p className='text-center mt-3'>Don't have Account?Please <Link className='text-blue-400 hover:text-blue-600' to={"/register"} >Register</Link> </p>
                             <div className='border border-white opacity-60 mt-5'></div>
                             <form onSubmit={handleLogin} className="fieldset ">
                                 <label className="label text-white">Email</label>

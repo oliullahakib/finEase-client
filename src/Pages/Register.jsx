@@ -34,15 +34,15 @@ const Register = () => {
                 setLoading(true)
                 // updateUser 
                 const userObj = {displayName,photoURL}
-                console.log(userObj)
+               
                 updateUser(res.user,userObj)
                 .then(() => {
                     toast.success("Create User Successfully")
-                    console.log(res.user)
+                   
                         setLoading(false)
                         navigate("/")
                     }).catch((error) => {
-                        console.log(error)
+                        toast.error(error.code)
                     });
             })
             .catch(err => {

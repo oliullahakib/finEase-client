@@ -19,7 +19,7 @@ const AddTransaction = () => {
         const email = user.email;
         const name = user.displayName;
         const newTransaction = { type, category, date, description, amount, name, email }
-        // console.log("add transaction",{type,category,date,description,amount,name,email})
+        
 
         axiosSecure.post("/add-transaction", newTransaction)
             .then(data => {

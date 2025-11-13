@@ -31,7 +31,7 @@ const OverView = () => {
         let totalExpense = 0
         expenseTransactions.forEach(transaction=> totalExpense=totalExpense+transaction.amount)
         const totalBalance = totalIncome-totalExpense
-    // console.log(totalExpense)
+    
         if(loading) return <Loading/>
     return (
         <Mydiv className='bg-linear-to-bl from-black  to-[#28d99e9f] mt-40 rounded-2xl shadow-2xl mb-10 pb-5'>

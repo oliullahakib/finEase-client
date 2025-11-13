@@ -71,7 +71,7 @@ const TransactionCard = ({ transaction, setTransactions }) => {
         const email = user.email;
         const name = user.displayName;
         const updateTransaction = { type, category, date, description, amount, name, email }
-        // console.log("edit transaction",updateTransaction,id)
+       
 
         axiosSecure.put(`/transaction/update/${id} `, updateTransaction)
             .then(data => {
